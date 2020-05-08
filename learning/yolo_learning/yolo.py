@@ -37,7 +37,7 @@ net = cv2.dnn.readNetFromDarknet(configpath, weightspath)
 #load image from path
 image = cv2.imread(args["image"])
 print("[INFO] image {}".format(args["image"]))
-(H,W,_) = image.shap
+(H,W,_) = image.shape
 
 #determine the output layer names we nede from YOLO
 ln = net.getLayerNames()
