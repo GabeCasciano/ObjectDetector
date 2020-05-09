@@ -60,11 +60,10 @@ for output in layerOutputs:
     for detection in output:
         # extract the class id a probability from the current object detection
         print(detection)
-        scores = detection[4:]
+        scores = detection[:5]
         classId = np.argmax(scores)
         confidence = scores[classIds]
-        print(classId)
-        print(confidence)
+
         # remove weak predictions
         if confidence > args["confidence"]:
             box = detection[0:4] * np.array([W, H, W, H])
