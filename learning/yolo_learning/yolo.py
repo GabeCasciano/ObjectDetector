@@ -33,6 +33,9 @@ COLORS = np.random.randint(0, 255, size=(len(LABELS), 3), dtype="uint8")
 #load darknet config and weights
 print("[INFO] Loading YOLO from disk ...")
 net = cv2.dnn.readNetFromDarknet(configpath, weightspath)
+net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
+net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
+
 
 #load image from path
 image = cv2.imread(args["image"])
@@ -60,7 +63,7 @@ for output in layerOutputs:
     for detection in output:
         # extract the class id a probability from the current object detection
         print(detection)
-        scores = detection[:5]
+        scores = detection[5:]
         classId = np.argmax(scores)
         confidence = scores[classIds]
 
